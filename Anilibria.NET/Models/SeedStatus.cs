@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Anilibria.NET.Models
 {
-    internal class SeedStatus
+    public class SeedStatus
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Anilibria.NET
 {
-    internal class Utilities
+    public class Utilities
     {
         public static async Task<TOutput> GetData<TOutput>(HttpClient httpClient, string rootUrl)
         {

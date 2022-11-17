@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models
+namespace Anilibria.NET.Models.Title.PostersModel
 {
-    internal class Team
+    public class Poster
     {
     }
 }

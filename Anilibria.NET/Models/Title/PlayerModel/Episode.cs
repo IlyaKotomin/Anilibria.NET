@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models
+namespace Anilibria.NET.Models.Title.PlayerModel
 {
-    internal class Title
+    public class Episode
     {
+        
     }
 }
