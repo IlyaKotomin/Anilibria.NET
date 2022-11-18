@@ -21,22 +21,33 @@ namespace Anilibria.NET.Models.Title
         
         [JsonProperty("description")] public string? Description { get; set; }
 
+        public TitleType? TitleType => TitleTypeConfiguration!.Type;
+
+        public TitleStatus? TitleStatus => StatusConfiguration!.Status;
+
+        public Season? Season => SeasonConfiguration!.Season;
 
         #endregion
 
 
         #region Detail Info
-        [JsonProperty("type")] public TitleType? TitleType { get; set; }
-        
-        [JsonProperty("status")] public Status? Status { get; set; }
-        
-        [JsonProperty("team")] public Team? Team { get; set; }
 
-        [JsonProperty("season")] public Season? Season { get; set; }
+        [JsonProperty("team")] public Team? Team { get; set; }
 
         [JsonProperty("in_favorites")] public string? InFavorites { get; set; }
 
         [JsonProperty("blocked")] public Blocked? Blocked { get; set; }
+
+        #endregion
+
+
+        #region Configurations
+
+        [JsonProperty("type")] public TitleTypeConfiguration? TitleTypeConfiguration { get; set; }
+
+        [JsonProperty("status")] public StatusConfiguration? StatusConfiguration { get; set; }
+        
+        [JsonProperty("season")] public SeasonConfiguration? SeasonConfiguration { get; set; }
 
         #endregion
 

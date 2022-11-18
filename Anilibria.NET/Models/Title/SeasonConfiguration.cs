@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace Anilibria.NET.Models.Title
 {
-    public class Status
+    public class SeasonConfiguration
     {
         [JsonProperty("string")] public string? String { get; set; }
 
         [JsonProperty("code")] public int Code { get; set; }
 
-        public override string ToString() => String;
+        [JsonProperty("year")] public int Year { get; set; }
+        
+        [JsonProperty("week_day")] public int WeekDay { get; set; }
+
+        public Season Season => (Season)Code;
+
+        public override string ToString() => $"{String!} {Year!}";
     }
 }
