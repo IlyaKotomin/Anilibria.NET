@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.TorrentsModel.TorrentFileModel
+namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel
 {
     public class TorrentQuality
     {

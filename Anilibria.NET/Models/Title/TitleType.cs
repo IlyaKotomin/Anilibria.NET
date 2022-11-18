@@ -1,4 +1,4 @@
-﻿namespace Anilibria.NET.Models.Title
+﻿namespace Anilibria.NET.Models.TitleModel
 {
     public enum TitleType
     {

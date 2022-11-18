@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Anilibria.NET.Models.Title.PostersModel
+namespace Anilibria.NET.Models.TitleModel.PostersModel
 {
     public class Posters
     {

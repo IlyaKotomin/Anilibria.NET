@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.PlayerModel
+namespace Anilibria.NET.Models.TitleModel.PlayerModel
 {
     public class Series
     {

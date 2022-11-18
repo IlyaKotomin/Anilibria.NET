@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.TorrentsModel.TorrentFileModel.TorrentFileMetadataModel
+namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel.TorrentFileMetadataModel
 {
     public class TorrenetMetadate
     {

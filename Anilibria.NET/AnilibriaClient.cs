@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Anilibria.NET.Models;
-using Anilibria.NET.Models.Title;
+using Anilibria.NET.Models.TitleModel;
 
 namespace Anilibria.NET
 {

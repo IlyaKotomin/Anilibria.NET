@@ -1,5 +1,5 @@
-﻿using Anilibria.NET.Models.Title.PlayerModel;
-using Anilibria.NET.Models.Title.TorrentsModel.TorrentFileModel.TorrentFileMetadataModel;
+﻿using Anilibria.NET.Models.TitleModel.PlayerModel;
+using Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel.TorrentFileMetadataModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.TorrentsModel.TorrentFileModel
+namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel
 {
     public class TorrentFile
     {

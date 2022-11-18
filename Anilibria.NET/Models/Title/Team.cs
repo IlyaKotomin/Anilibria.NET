@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title
+namespace Anilibria.NET.Models.TitleModel
 {
     public class Team
     {

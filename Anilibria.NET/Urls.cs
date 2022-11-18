@@ -24,10 +24,10 @@ namespace Anilibria.NET
             new Uri($"{API_ROOT_URL}/getTitle?id={id}&remove=player,torrents,posters");
 
         internal static Uri GetTitleUri(string code) =>
-            new Uri($"{API_ROOT_URL}/getTitle?code={code}&remove=player,torrents,posters");
+            new Uri($"{API_ROOT_URL}/getTitle?code_list={code}&remove=player,torrents,posters");
 
         internal static Uri GetTitlesUri(int[] id) =>
-            new Uri($"{API_ROOT_URL}/getTitles?id={string.Join(",", id)}&remove=player,torrents,posters");
+            new Uri($"{API_ROOT_URL}/getTitles?id_list={string.Join(",", id)}&remove=player,torrents,posters");
 
         internal static Uri GetTitlesUri(string[] codes) =>
             new Uri($"{API_ROOT_URL}/getTitles?codes={string.Join(",", codes)}&remove=player,torrents,posters");
@@ -43,6 +43,22 @@ namespace Anilibria.NET
 
         internal static Uri GetTitlePostersUri(string code) =>
             new Uri($"{API_ROOT_URL}/getTitle?code={code}&filter=posters");
+
+        internal static Uri GetTitlesUpdatesUri(int limit = 5, int after = 0) =>
+            new Uri($"{API_ROOT_URL}/getUpdates?remove=player,torrents,posters&after={after}&limit={limit}");
+
+        internal static Uri GetTitlesChangesUri(DateTime dateTime, int after = 0) =>
+            new Uri($"{API_ROOT_URL}/getChanges?remove=player,torrents,posters&" +
+                $"after={after}&since={((DateTimeOffset)dateTime).ToUnixTimeSeconds()}");
+
+        internal static Uri GetTitlesScheduleUri(int[] days) =>
+            new Uri($"{API_ROOT_URL}/getSchedule?remove=player,torrents,posters&days={string.Join(",", days)}");
+
+        internal static Uri GetCachingNodesUri() =>
+            new Uri($"{API_ROOT_URL}/v2/getCachingNodes");
+
+        internal static Uri GetRandomeTitleUri() =>
+            new Uri($"{API_ROOT_URL}/v2/getRandomTitle");
 
         #endregion
     }

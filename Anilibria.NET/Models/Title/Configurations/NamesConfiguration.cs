@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.Configurations
+namespace Anilibria.NET.Models.TitleModel.Configurations
 {
     public class NamesConfiguration
     {

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Anilibria.NET.Models.Title.PlayerModel.EpisodeModel;
+using Anilibria.NET.Models.TitleModel.PlayerModel.EpisodeModel;
 
-namespace Anilibria.NET.Models.Title.PlayerModel
+namespace Anilibria.NET.Models.TitleModel.PlayerModel
 {
     public class Player
     {

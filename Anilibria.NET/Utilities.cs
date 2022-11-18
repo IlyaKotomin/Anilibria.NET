@@ -8,6 +8,10 @@ namespace Anilibria.NET
         internal static async Task<TOutput> GetData<TOutput>(HttpClient httpClient, string rootUrl)
         {
             var json = await httpClient.GetStringAsync(rootUrl);
+
+            if (json == "[]")
+                throw new Exception("NO DATA HERE");
+
             return JsonConvert.DeserializeObject<TOutput>(json);
         }
 

@@ -1,11 +1,11 @@
-﻿using Anilibria.NET.Models.Title.Configurations;
-using Anilibria.NET.Models.Title.PlayerModel;
-using Anilibria.NET.Models.Title.PostersModel;
-using Anilibria.NET.Models.Title.TorrentsModel;
+﻿using Anilibria.NET.Models.TitleModel.Configurations;
+using Anilibria.NET.Models.TitleModel.PlayerModel;
+using Anilibria.NET.Models.TitleModel.PostersModel;
+using Anilibria.NET.Models.TitleModel.TorrentsModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Anilibria.NET.Models.Title
+namespace Anilibria.NET.Models.TitleModel
 {
     public class Title
     {
@@ -63,8 +63,12 @@ namespace Anilibria.NET.Models.Title
         public async Task<Player> GetPlayerAsync() =>
             await Utilities.GetSubClassData<Player>("player", Urls.GetTitlePlayerUri(Code!).AbsoluteUri, Anilibria.HttpClient);
 
-        public async Task<Posters> GetPostersAsync() =>
-            await Utilities.GetSubClassData<Posters>("posters", Urls.GetTitlePostersUri(Code!).AbsoluteUri, Anilibria.HttpClient);
+        public async Task<Posters> GetPostersAsync(bool downloadBase64) =>
+             await Utilities.GetSubClassData<Posters>("posters",
+                                                      Urls.GetTitlePostersUri(Code!).AbsoluteUri
+                                                      + (downloadBase64 ? "&include=raw_poster" : ""),
+                                                      Anilibria.HttpClient);
+
 
         public async Task<Torrent> GetTorrentAsync(bool downloadMetadate, bool downloadBase64)
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.PlayerModel.EpisodeModel
+namespace Anilibria.NET.Models.TitleModel.PlayerModel.EpisodeModel
 {
     public class HotLinks
     {
