@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title.PlayerModel
+namespace Anilibria.NET.Models.Title.PlayerModel.EpisodeModel
 {
-    public class Playlist
+    public class Episode
     {
         [JsonProperty("serie")]
         public string? SerieNumber { get; set; }
@@ -21,6 +21,6 @@ namespace Anilibria.NET.Models.Title.PlayerModel
         public string? Preview { get; set; }
 
         [JsonProperty("skips")]
-        public Skips Skips { get; set; }
+        public Skips? Skips { get; set; }
     }
 }

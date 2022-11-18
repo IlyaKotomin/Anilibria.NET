@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Anilibria.NET.Models.Title.PlayerModel.EpisodeModel;
 
 namespace Anilibria.NET.Models.Title.PlayerModel
 {
@@ -13,15 +9,15 @@ namespace Anilibria.NET.Models.Title.PlayerModel
         /// 
         /// </summary>
         [JsonProperty("alternative_player")]
-        public string AlternativePlayerLink { get; set; }
+        public string? AlternativePlayerLink { get; set; }
 
         [JsonProperty("host")]
         public string? HostLink { get; set; }
 
         [JsonProperty("series")]
-        public Series Series { get; set; }
+        public Series? Series { get; set; }
 
         [JsonProperty("playlist")]
-        public List<Playlist> Episodes { get; set; }
+        public List<Episode>? Episodes { get; set; }
     }
 }
