@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET.Models.Title
+namespace Anilibria.NET.Models.Title.Configurations
 {
     public class StatusConfiguration
     {
-        [JsonProperty("string")] public string? String { get; set; }
+        [JsonProperty("string")] public string? String { get; private set; }
 
-        [JsonProperty("code")] public int Code { get; set; }
+        [JsonProperty("code")] public int Code { get; private set; }
 
         public TitleStatus Status => (TitleStatus)Code;
 

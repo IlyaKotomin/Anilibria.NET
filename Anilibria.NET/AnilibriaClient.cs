@@ -4,31 +4,30 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Anilibria.NET.Models;
+using Anilibria.NET.Models.Title;
 
 namespace Anilibria.NET
 {
     /// <summary>
     /// Anilibria client
     /// </summary>
-    public class Client : IDisposable
+    public class AnilibriaClient : IDisposable
     {
         #region Client
 
         /// <summary>
-        /// Http Client
+        /// Http AnilibriaClient
         /// Use it to send GET methods
         /// </summary>
-        private readonly HttpClient _httpClient = new HttpClient();
+        internal readonly HttpClient HttpClient = new HttpClient();
 
         #endregion
 
-        public Client()
+        public AnilibriaClient()
         {
 
         }
 
-
-
-        public void Dispose() => _httpClient.Dispose();
+        public void Dispose() => HttpClient.Dispose();
     }
 }

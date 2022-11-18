@@ -10,15 +10,17 @@ namespace Anilibria.NET.Models.Title.PlayerModel.EpisodeModel
 {
     public class Episode
     {
-        [JsonProperty("serie")] public string? Number { get; set; }
+        [JsonProperty("serie")] public string? Number { get; private set; }
 
-        [JsonProperty("preview")] public string? Preview { get; set; }
+        [JsonProperty("preview")] public string? Preview { get; private set; }
 
-        [JsonProperty("skips")] public Skips? Skips { get; set; }
+        [JsonProperty("skips")] public Skips? Skips { get; private set; }
 
-        [JsonProperty("hls")] public HotLinks? HotLinks { get; set; }
+        [JsonProperty("hls")] public HotLinks? HotLinks { get; private set; }
         
         [JsonProperty("created_timestamp")]
-        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime CreatedDate { get; set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime CreatedDate { get; private set; }
+
+        public override string ToString() => $"Serie {Number}";
     }
 }

@@ -9,8 +9,10 @@ namespace Anilibria.NET.Models.Title.PlayerModel.EpisodeModel
 {
     public class Skips
     {
-        [JsonProperty("opening")] public List<int>? OpeningTimecodes { get; set; }
+        [JsonProperty("opening")] public List<int>? OpeningTimecodes { get; private set; }
 
-        [JsonProperty("ending")] public List<int>? EndingTimecodes { get; set; }
+        [JsonProperty("ending")] public List<int>? EndingTimecodes { get; private set; }
+
+        public override string ToString() => $"{string.Join(", ", OpeningTimecodes!)} | {string.Join(", ", EndingTimecodes!)}";
     }
 }

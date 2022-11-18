@@ -10,13 +10,13 @@ namespace Anilibria.NET.Models.Title.PlayerModel
     public class Series
     {
         [JsonProperty("first")]
-        public int First { get; set; }
+        public int First { get; private set; }
 
         [JsonProperty("last")]
-        public int Last { get; set; }
+        public int Last { get; private set; }
 
         [JsonProperty("string")]
-        public string? String { get; set; }
+        public string? String { get; private set; }
         public override string ToString() => String;
     }
 }

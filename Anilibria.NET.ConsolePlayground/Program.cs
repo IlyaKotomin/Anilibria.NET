@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 using Anilibria.NET.Models.Title;
+using Anilibria.NET.Models.Title.PlayerModel;
+using Anilibria.NET.Models.Title.TorrentsModel;
+using Anilibria.NET.Models.Title.PostersModel;
 
 namespace Anilibria.NET.ConsolePlayground
 {
@@ -8,17 +11,15 @@ namespace Anilibria.NET.ConsolePlayground
     {
         public async static Task Main(string[] args)
         {
-            Console.WriteLine("STARTED\n\n");
+            Title title = await Anilibria.GetTitleAsync("tate-no-yuusha-no-nariagari");
 
+            Torrent torrent = await title.GetTorrentAsync(true, true);
 
-            HttpClient client = new HttpClient();
+            Player player = await title.GetPlayerAsync();
 
-            var json = await client.GetStringAsync("https://api.anilibria.tv/v2/getTitle?id=8859&playlist_type=array");
-            Title title = JsonConvert.DeserializeObject<Title>(json);
+            Posters posters = await title.GetPostersAsync();
 
             System.Threading.Thread.Sleep(-1);
         }
-
-
     }
 }
