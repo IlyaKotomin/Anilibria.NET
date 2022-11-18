@@ -9,10 +9,10 @@ namespace Anilibria.NET.Models.Title
 {
     public class Blocked
     {
-        [JsonProperty("blocked")]
-        public bool IsBlocked { get; set; }
+        [JsonProperty("blocked")] public bool IsBlocked { get; set; }
         
-        [JsonProperty("bakanim")]
-        public bool IsBakanim { get; set; }
+        [JsonProperty("bakanim")] public bool IsBakanim { get; set; }
+
+        public override string ToString() => IsBlocked.ToString();
     }
 }

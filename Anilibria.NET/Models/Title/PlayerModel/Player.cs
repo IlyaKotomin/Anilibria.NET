@@ -5,19 +5,14 @@ namespace Anilibria.NET.Models.Title.PlayerModel
 {
     public class Player
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("alternative_player")]
-        public string? AlternativePlayerLink { get; set; }
+        [JsonProperty("alternative_player")] public string? AlternativePlayerLink { get; set; }
 
-        [JsonProperty("host")]
-        public string? HostLink { get; set; }
+        [JsonProperty("host")] public string? HostLink { get; set; }
 
-        [JsonProperty("series")]
-        public Series? Series { get; set; }
+        [JsonProperty("series")] public Series? Series { get; set; }
 
-        [JsonProperty("playlist")]
-        public List<Episode>? Episodes { get; set; }
+        [JsonProperty("playlist")] public List<Episode>? Playlist { get; set; }
+
+        public override string ToString() => HostLink;
     }
 }

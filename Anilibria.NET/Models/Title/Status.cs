@@ -9,10 +9,10 @@ namespace Anilibria.NET.Models.Title
 {
     public class Status
     {
-        [JsonProperty("string")]
-        public string String { get; set; }
+        [JsonProperty("string")] public string? String { get; set; }
 
-        [JsonProperty("code")]
-        public int Code { get; set; }
+        [JsonProperty("code")] public int Code { get; set; }
+
+        public override string ToString() => String;
     }
 }

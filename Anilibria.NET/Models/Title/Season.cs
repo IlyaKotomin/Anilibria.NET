@@ -9,16 +9,14 @@ namespace Anilibria.NET.Models.Title
 {
     public class Season
     {
-        [JsonProperty("string")]
-        public string String { get; set; }
+        [JsonProperty("string")] public string? String { get; set; }
 
-        [JsonProperty("code")]
-        public int Code { get; set; }
+        [JsonProperty("code")] public int Code { get; set; }
 
-        [JsonProperty("year")]
-        public int Year { get; set; }
+        [JsonProperty("year")] public int Year { get; set; }
         
-        [JsonProperty("week_day")]
-        public int WeekDay { get; set; }
+        [JsonProperty("week_day")] public int WeekDay { get; set; }
+
+        public override string ToString() => $"{String!} {Year!}";
     }
 }

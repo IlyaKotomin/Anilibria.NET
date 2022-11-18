@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Anilibria.NET.Models.Title.PlayerModel.EpisodeModel
 {
-    internal class HLS
+    public class HotLinks
     {
         [JsonProperty("fhd")] public string? FullHD_m3u8 { get; set; }
 
