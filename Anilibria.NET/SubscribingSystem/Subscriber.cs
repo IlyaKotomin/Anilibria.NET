@@ -30,7 +30,7 @@ namespace Anilibria.NET.SubscribingSystem
             SubscribedGenres = new();
         }
 
-        public async Task SubscribeOnTitle(Title title)
+        public async void SubscribeOnTitle(Title title)
         {
             await _webSocket.OpenAsync();
 
@@ -46,7 +46,7 @@ namespace Anilibria.NET.SubscribingSystem
             _webSocket.Send(message);
         }
 
-        public async Task SubscribeOnGenres(string[] genres)
+        public async void SubscribeOnGenres(string[] genres)
         {
             await _webSocket.OpenAsync();
 
@@ -62,13 +62,13 @@ namespace Anilibria.NET.SubscribingSystem
             _webSocket.Send(message);
         }
 
-        public async Task SubscribeOnTitiles(Title[] titles)
+        public async void SubscribeOnTitiles(Title[] titles)
         {
             foreach (var title in titles)
-                await SubscribeOnTitle(title);
+                SubscribeOnTitle(title);
         }
 
-        public async Task SubscribeOnNew()
+        public async void SubscribeOnNew()
         {
             await _webSocket.OpenAsync();
 
@@ -95,7 +95,6 @@ namespace Anilibria.NET.SubscribingSystem
                 throw new Exception("Something went wrong!");
 
             Title title = JsonConvert.DeserializeObject<Title>(e.Message)!;
-
 
             if (OnTitleRecieved != null)
                 OnTitleRecieved(this, new TitleRecievedEventArgs() { Title = title });

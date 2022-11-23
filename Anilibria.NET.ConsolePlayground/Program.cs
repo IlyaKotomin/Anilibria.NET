@@ -13,7 +13,7 @@ namespace Anilibria.NET.ConsolePlayground
         public async Task MainAsync()
         {
             Subscriber subscriber = new();
-            await subscriber.SubscribeOnNew();
+            subscriber.SubscribeOnNew();
 
             subscriber.OnTitleRecieved += OnNewTitleRecieved;
 
