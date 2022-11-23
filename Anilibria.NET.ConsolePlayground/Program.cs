@@ -12,14 +12,9 @@ namespace Anilibria.NET.ConsolePlayground
 
         public async Task MainAsync()
         {
-            Subscriber subscriber = new();
-            subscriber.SubscribeOnNew();
+            var title = await Anilibria.GetRandomTitleAsync();
 
-            subscriber.OnTitleRecieved += OnNewTitleRecieved;
-
-
-
-            Thread.Sleep(-1);
+            Console.WriteLine("123");
         }
 
         private static void OnNewTitleRecieved(object sender, TitleRecievedEventArgs e)

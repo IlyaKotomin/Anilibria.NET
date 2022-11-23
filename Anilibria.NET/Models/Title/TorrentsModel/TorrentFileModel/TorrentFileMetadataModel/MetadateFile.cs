@@ -9,10 +9,10 @@ namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel.Torrent
 {
     public class MetadateFile
     {
-        [JsonProperty("file")] public string? FileName { get; set; }
+        [JsonProperty("file")] public string? FileName { get; private set; }
 
-        [JsonProperty("size")] public ulong FileSize { get; set; }
+        [JsonProperty("size")] public ulong FileSize { get; private set; }
 
-        [JsonProperty("offset")] public ulong FileOffset { get; set; }
+        [JsonProperty("offset")] public ulong FileOffset { get; private set; }
     }
 }

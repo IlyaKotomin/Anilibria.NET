@@ -10,9 +10,13 @@ namespace Anilibria.NET.Models
 {
     public class Schedule
     {
-        [JsonProperty("day")] public int Day { get; set; }
 
-        [JsonProperty("list")] public List<Title>? Titles { get; set; }
-        public override string ToString() => ((CISDaysOfWeek)Day).ToString();
+        [JsonProperty("day")] public int Day { get; private set; }
+
+        [JsonProperty("list")] public List<Title>? Titles { get; private set; }
+
+        public CISDaysOfWeek DayOfWeek => (CISDaysOfWeek)Day;
+
+        public override string ToString() => DayOfWeek.ToString();
     }
 }

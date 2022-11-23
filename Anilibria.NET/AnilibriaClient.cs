@@ -16,11 +16,6 @@ namespace Anilibria.NET
     public class AnilibriaClient : IDisposable
     {
         #region Client
-
-        /// <summary>
-        /// Http AnilibriaClient
-        /// Use it to send GET methods
-        /// </summary>
         private readonly HttpClient _httpClient;
 
         private readonly string _login;
@@ -38,10 +33,12 @@ namespace Anilibria.NET
             _login = login;
             _password = password;
 
-            _token = 1234123412341234.ToString();
+            _httpClient = new HttpClient();
+
+            _token = "";
         }
 
-        public async void Login()
+        public async Task LoginAsync()
         {
             var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/login.php");
 
@@ -52,44 +49,42 @@ namespace Anilibria.NET
             };
 
             var content = new FormUrlEncodedContent(values);
-            var cookieJar = new CookieContainer();
-            var handler = new HttpClientHandler
-            {
-                CookieContainer = cookieJar,
-                UseCookies = true,
-                UseDefaultCredentials = false
-            };
-
-            var client = new HttpClient(handler);
 
             var response = await _httpClient.PostAsync(uri, content);
 
-            response.EnsureSuccessStatusCode();
+            string recievedContent = await response.Content.ReadAsStringAsync();
 
-            var responseCookies = cookieJar.GetCookies(uri);
+            var jObject = new JObject(recievedContent);
 
-            foreach (Cookie cookie in responseCookies)
+            string key = jObject["key"]!.ToString();
+
+            if (key == "success")
             {
-                string cookieName = cookie.Name;
-                string cookieValue = cookie.Value;
-
-                Console.WriteLine(cookieName);
-                Console.WriteLine(cookieValue);
+                _token = jObject["sessionId"]!.ToString();
+            }
+            else if (key == "authorized")
+            {
 
             }
-            //_token = "PRGcION85n9DMDMIafnI4rVaboO5Lcn7";
+            else if (key == "invalidUser")
+            {
 
+            }
         }
 
-        public async void Logout()
+        public async Task LogoutAsync()
         {
+            var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/login.php");
+
             var values = new Dictionary<string, string>()
             {
+                {"mail", _login },
+                {"passwd", _password }
             };
 
             var content = new FormUrlEncodedContent(values);
 
-            var response = await _httpClient.PostAsync($"{Urls.SITE_ROOT_URL}/public/logout.php", content);
+            await _httpClient.PostAsync(uri, content);
         }
 
         public void Dispose() => _httpClient.Dispose();

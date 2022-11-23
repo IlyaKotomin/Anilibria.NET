@@ -12,29 +12,29 @@ namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel
 {
     public class TorrentFile
     {
-        [JsonProperty("torrent_id")] public int Id { get; set; }
+        [JsonProperty("torrent_id")] public int Id { get; private set; }
 
-        [JsonProperty("series")] public Series? Series { get; set; }
+        [JsonProperty("series")] public Series? Series { get; private set; }
 
-        [JsonProperty("quality")] public TorrentQuality? Quality { get; set; }
+        [JsonProperty("quality")] public TorrentQuality? Quality { get; private set; }
 
-        [JsonProperty("leechers")] public int Leechers { get; set; }
+        [JsonProperty("leechers")] public int Leechers { get; private set; }
 
-        [JsonProperty("seeders")] public int Seeders { get; set; }
+        [JsonProperty("seeders")] public int Seeders { get; private set; }
 
-        [JsonProperty("downloads")] public ulong Downloads { get; set; }
+        [JsonProperty("downloads")] public ulong Downloads { get; private set; }
 
-        [JsonProperty("total_size")] public ulong Size { get; set; }
+        [JsonProperty("total_size")] public ulong Size { get; private set; }
 
-        [JsonProperty("url")] public string? RawUrl { get; set; }
+        [JsonProperty("url")] public string? RawUrl { get; private set; }
 
         [JsonProperty("uploaded_timestamp")]
-        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime? UploadedDate { get; set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime? UploadedDate { get; private set; }
 
-        [JsonProperty("hash")] public string? Hash { get; set; }
+        [JsonProperty("hash")] public string? Hash { get; private set; }
 
-        [JsonProperty("metadata")] public TorrenetMetadate? Metadate { get; set; }
+        [JsonProperty("metadata")] public TorrenetMetadate? Metadate { get; private set; }
 
-        [JsonProperty("raw_base64_file")] public string? Base64 { get; set; }
+        [JsonProperty("raw_base64_file")] public string? Base64 { get; private set; }
     }
 }

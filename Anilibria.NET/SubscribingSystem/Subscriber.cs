@@ -1,5 +1,6 @@
 ﻿using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace Anilibria.NET.SubscribingSystem
             _webSocket.Send(message);
         }
 
-        public async void SubscribeOnTitiles(Title[] titles)
+        public void SubscribeOnTitiles(Title[] titles)
         {
             foreach (var title in titles)
                 SubscribeOnTitle(title);
@@ -94,12 +95,12 @@ namespace Anilibria.NET.SubscribingSystem
             if (e.Message.Contains("\"error\":"))
                 throw new Exception("Something went wrong!");
 
-            Title title = JsonConvert.DeserializeObject<Title>(e.Message)!;
+            JObject jObject = new JObject(e.Message);
+
+            Title title = JsonConvert.DeserializeObject<Title>(jObject["title_update.title"]!.ToString())!;
 
             if (OnTitleRecieved != null)
                 OnTitleRecieved(this, new TitleRecievedEventArgs() { Title = title });
-
-            Console.WriteLine(title.Name);
         }
     }
 }

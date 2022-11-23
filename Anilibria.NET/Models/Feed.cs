@@ -10,9 +10,9 @@ namespace Anilibria.NET.Models
 {
     public class Feed
     {
-        [JsonProperty("youtube")] public YouTubePost? YouTubePost { get; set; }
+        [JsonProperty("youtube")] public YouTubePost? YouTubePost { get; private set; }
 
-        [JsonProperty("Title")] public Title? Title { get; set; }
+        [JsonProperty("Title")] public Title? Title { get; private set; }
 
         public override string ToString() => YouTubePost == null ? Title!.NamesConfiguration!.Russian : YouTubePost.Name;
     }

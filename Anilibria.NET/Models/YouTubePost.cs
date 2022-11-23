@@ -10,20 +10,20 @@ namespace Anilibria.NET.Models
 {
     public class YouTubePost
     {
-        [JsonProperty("id")] public int? Id { get; set; }
+        [JsonProperty("id")] public int? Id { get; private set; }
 
-        [JsonProperty("title")] public string? Name { get; set; }
+        [JsonProperty("title")] public string? Name { get; private set; }
 
-        [JsonProperty("image")] public string? ImageUrl { get; set; }
+        [JsonProperty("image")] public string? ImageUrl { get; private set; }
 
-        [JsonProperty("comments")] public int? Comments { get; set; }
+        [JsonProperty("comments")] public int? Comments { get; private set; }
 
-        [JsonProperty("views")] public int? Views { get; set; }
+        [JsonProperty("views")] public int? Views { get; private set; }
         
-        [JsonProperty("youtube_id")] public string? YoutubeId { get; set; }
+        [JsonProperty("youtube_id")] public string? YoutubeId { get; private set; }
 
         [JsonProperty("timestamp")]
-        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime Release { get; set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime Release { get; private set; }
 
         public override string ToString() => Name;
     }

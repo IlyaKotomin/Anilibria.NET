@@ -9,10 +9,10 @@ namespace Anilibria.NET.Models
 {
     public class AnilibriaUser
     {
-        [JsonProperty("downloaded")] public ulong Downloaded { get; set; }
+        [JsonProperty("downloaded")] public ulong Downloaded { get; private set; }
 
-        [JsonProperty("uploaded")] public ulong Uploaded { get; set; }
+        [JsonProperty("uploaded")] public ulong Uploaded { get; private set; }
 
-        [JsonProperty("user")] public string? UserName { get; set; }
+        [JsonProperty("user")] public string? UserName { get; private set; }
     }
 }
