@@ -1,4 +1,6 @@
-﻿using System.Security;
+﻿using Anilibria.NET.Models;
+using Anilibria.NET.Models.TitleModel;
+using System.Security;
 
 namespace Anilibria.NET
 {
@@ -55,10 +57,25 @@ namespace Anilibria.NET
             new Uri($"{API_ROOT_URL}/getSchedule?remove=player,torrents,posters&days={string.Join(",", days)}");
 
         internal static Uri GetCachingNodesUri() =>
-            new Uri($"{API_ROOT_URL}/v2/getCachingNodes");
+            new Uri($"{API_ROOT_URL}/getCachingNodes");
 
         internal static Uri GetRandomeTitleUri() =>
-            new Uri($"{API_ROOT_URL}/v2/getRandomTitle");
+            new Uri($"{API_ROOT_URL}/getRandomTitle");
+
+        internal static Uri GetYouTubeUri(DateTime dateTime, int limit = 5, int after = 0) =>
+            new Uri($"{API_ROOT_URL}/getYouTube?limit={limit}&after={after}&since={((DateTimeOffset)dateTime).ToUnixTimeSeconds()}");
+
+        internal static Uri GetFeedUri(DateTime dateTime, int limit = 5, int after = 0) =>
+            new Uri($"{API_ROOT_URL}/getFeed?limit={limit}&after={after}&since={((DateTimeOffset)dateTime).ToUnixTimeSeconds()}");
+
+        internal static Uri GetAnimeYearsUri() =>
+            new Uri($"{API_ROOT_URL}/getYears");
+
+        internal static Uri GetAnimeGenresUri(GenresSortingType sortingType) =>
+            new Uri($"{API_ROOT_URL}/getGenres?sorting_type={(int)sortingType}");
+
+        internal static Uri GetSearchTitlesUri(SearchQueryBuilder queryBuilder) =>
+            new Uri($"{API_ROOT_URL}{queryBuilder.Build()}");
 
         #endregion
     }

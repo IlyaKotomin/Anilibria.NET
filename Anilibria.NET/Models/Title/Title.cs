@@ -91,10 +91,10 @@ namespace Anilibria.NET.Models.TitleModel
         #region Dates
 
         [JsonProperty("updated")]
-        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime UdatedDate { get; private set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime? UdatedDate { get; private set; }
 
         [JsonProperty("last_change")]
-        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime LastChangeDate { get; private set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime? LastChangeDate { get; private set; }
 
         #endregion
 

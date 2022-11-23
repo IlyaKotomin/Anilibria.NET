@@ -1,19 +1,30 @@
-﻿using Newtonsoft.Json;
-using System.Net.Http;
-using Anilibria.NET.Models.TitleModel;
+﻿using Anilibria.NET.Models.TitleModel;
 using Anilibria.NET.Models.TitleModel.PlayerModel;
 using Anilibria.NET.Models.TitleModel.TorrentsModel;
 using Anilibria.NET.Models.TitleModel.PostersModel;
+using Anilibria.NET.SubscribingSystem;
 
 namespace Anilibria.NET.ConsolePlayground
 {
     class Programm
     {
-        public async static Task Main(string[] args)
-        {
-            var title = await Anilibria.GetRandomTitleAsync();
+        public static void Main(string[] args) => new Programm().MainAsync().GetAwaiter().GetResult();
 
-            System.Threading.Thread.Sleep(-1);
+        public async Task MainAsync()
+        {
+            Subscriber subscriber = new();
+            await subscriber.SubscribeOnNew();
+
+            subscriber.OnTitleRecieved += OnNewTitleRecieved;
+
+
+
+            Thread.Sleep(-1);
+        }
+
+        private static void OnNewTitleRecieved(object sender, TitleRecievedEventArgs e)
+        {
+            Console.WriteLine(e.Title!.Name);
         }
     }
 }

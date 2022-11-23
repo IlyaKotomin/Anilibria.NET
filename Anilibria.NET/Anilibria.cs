@@ -1,7 +1,9 @@
 ﻿using Anilibria.NET.Models;
 using Anilibria.NET.Models.TitleModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,11 @@ namespace Anilibria.NET
     {
         internal static HttpClient HttpClient = new HttpClient();
 
+        /// <summary>
+        /// Returns title by id from anilibriya.tv
+        /// </summary>
+        /// <param name="id">Title ID</param>
+        /// <returns>anime title</returns>
         public static Task<Title> GetTitleAsync(int id) =>
             Utilities.GetData<Title>(HttpClient, Urls.GetTitleUri(id).AbsoluteUri);
 
@@ -25,7 +32,7 @@ namespace Anilibria.NET
             Utilities.GetData<Title[]>(HttpClient, Urls.GetTitlesUri(ids).AbsoluteUri);
 
         public static Task<Title[]> GetTitlesUpdatesAsync(int limit = 5, int after = 0) =>
-            Utilities.GetData<Title[]>(HttpClient, Urls.GetTitlesUpdatesUri(limit,after).AbsoluteUri);
+            Utilities.GetData<Title[]>(HttpClient, Urls.GetTitlesUpdatesUri(limit, after).AbsoluteUri);
 
         public static Task<Title[]> GetTitlesChangesAsync(DateTime dateTime, int after = 0) =>
             Utilities.GetData<Title[]>(HttpClient, Urls.GetTitlesChangesUri(dateTime, after).AbsoluteUri);
@@ -38,5 +45,20 @@ namespace Anilibria.NET
 
         public static Task<Title> GetRandomTitleAsync() =>
             Utilities.GetData<Title>(HttpClient, Urls.GetRandomeTitleUri().AbsoluteUri);
+
+        public static Task<YouTubePost[]> GetYouTubePostsAsync(DateTime dateTime, int limit = 5, int after = 0) =>
+            Utilities.GetData<YouTubePost[]>(HttpClient, Urls.GetYouTubeUri(dateTime, limit, after).AbsoluteUri);
+
+        public static Task<Feed[]> GetFeedAsync(DateTime dateTime, int limit = 5, int after = 0) =>
+            Utilities.GetData<Feed[]>(HttpClient, Urls.GetFeedUri(dateTime, limit, after).AbsoluteUri);
+
+        public static Task<int[]> GetAnimeYearsAsync() =>
+            Utilities.GetData<int[]>(HttpClient, Urls.GetAnimeYearsUri().AbsoluteUri);
+
+        public static Task<string[]> GetAnimeGenresAsync(GenresSortingType sortingType) =>
+            Utilities.GetData<string[]>(HttpClient, Urls.GetAnimeGenresUri(sortingType).AbsoluteUri);
+
+        public static Task<Title[]> SearchTitlesAsync(SearchQueryBuilder queryBuilder) =>
+            Utilities.GetData<Title[]>(HttpClient, Urls.GetSearchTitlesUri(queryBuilder).AbsoluteUri);
     }
 }
