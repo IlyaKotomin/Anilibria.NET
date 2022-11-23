@@ -20,7 +20,7 @@ namespace Anilibria.NET
 
         #endregion
 
-        #region DATA URLS
+        #region PUBLIC DATA URLS
 
         internal static Uri GetTitleUri(int id) =>
             new Uri($"{API_ROOT_URL}/getTitle?id={id}&remove=player,torrents,posters");
@@ -76,6 +76,14 @@ namespace Anilibria.NET
 
         internal static Uri GetSearchTitlesUri(SearchQueryBuilder queryBuilder) =>
             new Uri($"{API_ROOT_URL}{queryBuilder.Build()}");
+
+        #endregion
+
+        #region CLIENT DATA URLS
+
+        internal static Uri GetFavoriteTitles(string token) =>
+            new Uri($"{API_ROOT_URL}/getFavorites?session={token}&remove=player,torrents,posters");
+
 
         #endregion
     }

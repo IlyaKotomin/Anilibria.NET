@@ -7,6 +7,7 @@ using Anilibria.NET.Models;
 using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Anilibria.NET
 {
@@ -52,9 +53,9 @@ namespace Anilibria.NET
 
             var response = await _httpClient.PostAsync(uri, content);
 
-            string recievedContent = await response.Content.ReadAsStringAsync();
+            string json = await response.Content.ReadAsStringAsync();
 
-            var jObject = new JObject(recievedContent);
+            var jObject = JObject.Parse(json);
 
             string key = jObject["key"]!.ToString();
 
@@ -64,11 +65,11 @@ namespace Anilibria.NET
             }
             else if (key == "authorized")
             {
-
+                return;
             }
             else if (key == "invalidUser")
             {
-
+                throw new Exception("Login error! Invalid User!");
             }
         }
 
@@ -80,6 +81,43 @@ namespace Anilibria.NET
             {
                 {"mail", _login },
                 {"passwd", _password }
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            await _httpClient.PostAsync(uri, content);
+
+            _token = "";
+        }
+
+        public async Task<Title[]> GetFavoriteTitles() =>
+            await Utilities.GetData<Title[]>(_httpClient, Urls.GetFavoriteTitles(_token).AbsoluteUri);
+
+        public async Task DeleteFavoriteAsync(Title title)
+        {
+            var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/api/index.php");
+
+            var values = new Dictionary<string, string>()
+            {
+                {"query", "favorites" },
+                {"id", title.Id.ToString() },
+                {"action", "delete" },
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            await _httpClient.PostAsync(uri, content);
+        }
+
+        public async Task AddFavoriteAsync(Title title)
+        {
+            var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/api/index.php");
+
+            var values = new Dictionary<string, string>()
+            {
+                {"query", "favorites" },
+                {"id", title.Id.ToString() },
+                {"action", "add" },
             };
 
             var content = new FormUrlEncodedContent(values);

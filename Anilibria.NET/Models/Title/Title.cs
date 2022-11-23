@@ -9,7 +9,7 @@ namespace Anilibria.NET.Models.TitleModel
 {
     public class Title
     {
-        #region Common Info
+        #region Common-Info
 
         [JsonProperty("team")] public Team? Team { get; private set; }
 

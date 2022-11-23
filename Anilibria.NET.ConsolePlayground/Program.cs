@@ -12,7 +12,9 @@ namespace Anilibria.NET.ConsolePlayground
 
         public async Task MainAsync()
         {
-            var title = await Anilibria.GetRandomTitleAsync();
+            var client = new AnilibriaClient("Kotoxik", "kokoilko1234");
+
+
 
             Console.WriteLine("123");
         }
