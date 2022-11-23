@@ -1,20 +1,21 @@
-﻿using Anilibria.NET.Models;
+﻿using Anilibria.NET.Builders;
+using Anilibria.NET.Models;
 using Anilibria.NET.Models.TitleModel;
 using System.Security;
 
-namespace Anilibria.NET
+namespace Anilibria.NET.Helpers
 {
     internal static class Urls
     {
         #region ROOT URLS
 
         /// <summary>
-        /// Anilibria API url
+        /// AnilibriaAPI API url
         /// </summary>
         public const string API_ROOT_URL = "https://api.anilibria.tv/v2";
 
         /// <summary>
-        /// Anilibria site url
+        /// AnilibriaAPI site url
         /// </summary>
         public const string SITE_ROOT_URL = "https://www.anilibria.tv";
 

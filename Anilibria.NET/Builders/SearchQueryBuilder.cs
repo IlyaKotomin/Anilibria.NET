@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using System.Web;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Anilibria.NET
+namespace Anilibria.NET.Builders
 {
     public class SearchQueryBuilder
     {
         public int LimitIndex;
         public int AfterIndex;
-        
+
         private string _query = "";
         private Dictionary<string, string> _searchKeys = new Dictionary<string, string>();
 

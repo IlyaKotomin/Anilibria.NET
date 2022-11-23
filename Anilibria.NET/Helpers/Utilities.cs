@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 
-namespace Anilibria.NET
+namespace Anilibria.NET.Helpers
 {
     internal class Utilities
     {

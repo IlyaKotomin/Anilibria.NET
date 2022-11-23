@@ -2,6 +2,7 @@
 using Anilibria.NET.Models.TitleModel.PlayerModel;
 using Anilibria.NET.Models.TitleModel.TorrentsModel;
 using Anilibria.NET.Models.TitleModel.PostersModel;
+using Anilibria.NET.Client;
 using Anilibria.NET.SubscribingSystem;
 
 namespace Anilibria.NET.ConsolePlayground
@@ -13,8 +14,6 @@ namespace Anilibria.NET.ConsolePlayground
         public async Task MainAsync()
         {
             var client = new AnilibriaClient("Kotoxik", "kokoilko1234");
-
-
 
             Console.WriteLine("123");
         }

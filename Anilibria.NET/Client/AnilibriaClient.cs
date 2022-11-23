@@ -8,11 +8,12 @@ using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using static System.Collections.Specialized.BitVector32;
+using Anilibria.NET.Helpers;
 
-namespace Anilibria.NET
+namespace Anilibria.NET.Client
 {
     /// <summary>
-    /// Anilibria client
+    /// AnilibriaAPI client
     /// </summary>
     public class AnilibriaClient : IDisposable
     {
@@ -53,23 +54,19 @@ namespace Anilibria.NET
 
             var response = await _httpClient.PostAsync(uri, content);
 
-            string json = await response.Content.ReadAsStringAsync();
-
-            var jObject = JObject.Parse(json);
+            var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
 
             string key = jObject["key"]!.ToString();
 
-            if (key == "success")
+            switch (key)
             {
-                _token = jObject["sessionId"]!.ToString();
-            }
-            else if (key == "authorized")
-            {
-                return;
-            }
-            else if (key == "invalidUser")
-            {
-                throw new Exception("Login error! Invalid User!");
+                case "success":
+                    _token = jObject["sessionId"]!.ToString();
+                    break;
+                case "authorized":
+                    return;
+                case "invalidUser":
+                    throw new Exception("Login error! Invalid User!");
             }
         }
 

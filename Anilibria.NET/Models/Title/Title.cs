@@ -1,4 +1,6 @@
-﻿using Anilibria.NET.Models.TitleModel.Configurations;
+﻿using Anilibria.NET.Client;
+using Anilibria.NET.Helpers;
+using Anilibria.NET.Models.TitleModel.Configurations;
 using Anilibria.NET.Models.TitleModel.PlayerModel;
 using Anilibria.NET.Models.TitleModel.PostersModel;
 using Anilibria.NET.Models.TitleModel.TorrentsModel;
@@ -61,13 +63,14 @@ namespace Anilibria.NET.Models.TitleModel
         #region Content
 
         public async Task<Player> GetPlayerAsync() =>
-            await Utilities.GetSubClassData<Player>("player", Urls.GetTitlePlayerUri(Code!).AbsoluteUri, Anilibria.HttpClient);
+            await Utilities.GetSubClassData<Player>("player", Urls.GetTitlePlayerUri(Code!).AbsoluteUri, AnilibriaAPI.HttpClient);
+
 
         public async Task<Posters> GetPostersAsync(bool downloadBase64) =>
              await Utilities.GetSubClassData<Posters>("posters",
                                                       Urls.GetTitlePostersUri(Code!).AbsoluteUri
                                                       + (downloadBase64 ? "&include=raw_poster" : ""),
-                                                      Anilibria.HttpClient);
+                                                      AnilibriaAPI.HttpClient);
 
 
         public async Task<Torrent> GetTorrentAsync(bool downloadMetadate, bool downloadBase64)
@@ -82,7 +85,7 @@ namespace Anilibria.NET.Models.TitleModel
 
             string rootUrl = Urls.GetTitleTorrentUri(Id).AbsoluteUri + "&include=" + string.Join(',', includes);
 
-            return await Utilities.GetSubClassData<Torrent>("torrents", rootUrl, Anilibria.HttpClient);
+            return await Utilities.GetSubClassData<Torrent>("torrents", rootUrl, AnilibriaAPI.HttpClient);
         }
 
         #endregion

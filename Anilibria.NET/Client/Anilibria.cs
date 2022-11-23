@@ -1,4 +1,6 @@
-﻿using Anilibria.NET.Models;
+﻿using Anilibria.NET.Builders;
+using Anilibria.NET.Helpers;
+using Anilibria.NET.Models;
 using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json;
 using System;
@@ -8,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anilibria.NET
+namespace Anilibria.NET.Client
 {
-    public static class Anilibria
+    public static class AnilibriaAPI
     {
         internal static HttpClient HttpClient = new HttpClient();
 
