@@ -1,4 +1,5 @@
-﻿using Anilibria.NET.Models.TitleModel;
+﻿using Anilibria.NET.Helpers.LogSystem;
+using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -29,10 +30,14 @@ namespace Anilibria.NET.SubscribingSystem
 
             SubscribedTitles = new();
             SubscribedGenres = new();
+
+            Logger.Log("Subscriber Created!", LogType.Subscriber, LogReasonContext.Info);
         }
 
         public async void SubscribeOnTitle(Title title)
         {
+            Logger.Log($"Starting subscribe process (Title: {title.Code} | {title.Id})", LogType.Subscriber, LogReasonContext.Info);
+
             await _webSocket.OpenAsync();
 
             string message = @"{
@@ -49,6 +54,8 @@ namespace Anilibria.NET.SubscribingSystem
 
         public async void SubscribeOnGenres(string[] genres)
         {
+            Logger.Log($"Starting subscribe process (Titles by genres: {string.Join(", ", genres)})", LogType.Subscriber, LogReasonContext.Info);
+
             await _webSocket.OpenAsync();
 
             string message = @"{
@@ -65,12 +72,21 @@ namespace Anilibria.NET.SubscribingSystem
 
         public void SubscribeOnTitiles(Title[] titles)
         {
+            int[] ids = new int[titles.Length];
+
+            for(int i = 0; i < ids.Length; i++)
+                ids[i] = titles[i].Id;
+
+            Logger.Log($"Starting subscribe process (Titles: {string.Join(", ", ids)})", LogType.Subscriber, LogReasonContext.Info);
+
             foreach (var title in titles)
                 SubscribeOnTitle(title);
         }
 
         public async void SubscribeOnNew()
         {
+            Logger.Log($"Starting subscribe process (New Titles)", LogType.Subscriber, LogReasonContext.Info);
+
             await _webSocket.OpenAsync();
 
             string message = @"{
@@ -89,18 +105,30 @@ namespace Anilibria.NET.SubscribingSystem
 
         private void OnMessageReceived(object? sender, MessageReceivedEventArgs e)
         {
-            if (e.Message.Contains("\"subscribe\":") || e.Message.Contains("\"connection\":"))
+            if (e.Message.Contains("\"connection\":"))
+            {
+                Logger.Log($"Connected to server!)", LogType.Subscriber, LogReasonContext.Info);
                 return;
+            }
+
+            if (e.Message.Contains("\"subscribe\":"))
+            {
+                Logger.Log($"Subscribed to title(s)!)", LogType.Subscriber, LogReasonContext.Info);
+                return;
+            }
 
             if (e.Message.Contains("\"error\":"))
+            {
+                Logger.Log($"ERROR!)", LogType.Subscriber, LogReasonContext.Error);
                 throw new Exception("Something went wrong!");
+            }
 
             JObject jObject = new JObject(e.Message);
 
             Title title = JsonConvert.DeserializeObject<Title>(jObject["title_update.title"]!.ToString())!;
 
             if (OnTitleRecieved != null)
-                OnTitleRecieved(this, new TitleRecievedEventArgs() { Title = title });
+                OnTitleRecieved(this, new TitleRecievedEventArgs(title));
         }
     }
 }

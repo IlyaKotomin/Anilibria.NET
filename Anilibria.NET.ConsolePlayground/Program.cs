@@ -4,6 +4,8 @@ using Anilibria.NET.Models.TitleModel.TorrentsModel;
 using Anilibria.NET.Models.TitleModel.PostersModel;
 using Anilibria.NET.Client;
 using Anilibria.NET.SubscribingSystem;
+using Anilibria.NET.Helpers.LogSystem;
+using System.Linq.Expressions;
 
 namespace Anilibria.NET.ConsolePlayground
 {
@@ -13,14 +15,32 @@ namespace Anilibria.NET.ConsolePlayground
 
         public async Task MainAsync()
         {
+            Logger.OnLog += OnLogRecieved;
+
+            var subscriber = new Subscriber();
+
+            subscriber.OnTitleRecieved += OnNewTitleRecieved;
+
+            subscriber.SubscribeOnNew();
+
             var client = new AnilibriaClient("Kotoxik", "kokoilko1234");
 
-            Console.WriteLine("123");
+            await client.LoginAsync();
+
+            var titles = await client.GetFavoriteTitles();
+
+            Logger.Log("Got favorite titels from");
+
+            Thread.Sleep(-1);
         }
+
+        private void OnLogRecieved(LogEventArgs args) => Console.WriteLine(args.Log);
 
         private static void OnNewTitleRecieved(object sender, TitleRecievedEventArgs e)
         {
             Console.WriteLine(e.Title!.Name);
+
+            File.WriteAllText(e.Title.Code + ".txt", e.Title.Name);
         }
     }
 }

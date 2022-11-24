@@ -6,9 +6,8 @@ using Newtonsoft.Json;
 using Anilibria.NET.Models;
 using Anilibria.NET.Models.TitleModel;
 using Newtonsoft.Json.Linq;
-using System.Net;
-using static System.Collections.Specialized.BitVector32;
 using Anilibria.NET.Helpers;
+using Anilibria.NET.Helpers.LogSystem;
 
 namespace Anilibria.NET.Client
 {
@@ -38,10 +37,14 @@ namespace Anilibria.NET.Client
             _httpClient = new HttpClient();
 
             _token = "";
+
+            Logger.Log("Client Created!", LogType.AnilibriaClient, LogReasonContext.Info);
         }
 
         public async Task LoginAsync()
         {
+            Logger.Log($"Logging in.. (User: {_login} | Password : {_password})", LogType.AnilibriaClient, LogReasonContext.Info);
+
             var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/login.php");
 
             var values = new Dictionary<string, string>()
@@ -61,17 +64,23 @@ namespace Anilibria.NET.Client
             switch (key)
             {
                 case "success":
+                    Logger.Log($"Loggined! User: {_login}", LogType.AnilibriaClient, LogReasonContext.Info);
                     _token = jObject["sessionId"]!.ToString();
+                    Logger.Log($"Token Added! Token: {Token}", LogType.AnilibriaClient, LogReasonContext.Info);
                     break;
                 case "authorized":
+                    Logger.Log("ALREADY authorized!", LogType.AnilibriaClient, LogReasonContext.Warning);
                     return;
                 case "invalidUser":
+                    Logger.Log("Login ERROR! Invalid User!", LogType.AnilibriaClient, LogReasonContext.Error);
                     throw new Exception("Login error! Invalid User!");
             }
         }
 
         public async Task LogoutAsync()
         {
+            Logger.Log($"Logging Out Process Started! User: {_login}", LogType.AnilibriaClient, LogReasonContext.Info);
+
             var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/login.php");
 
             var values = new Dictionary<string, string>()
@@ -85,29 +94,28 @@ namespace Anilibria.NET.Client
             await _httpClient.PostAsync(uri, content);
 
             _token = "";
+
+            Logger.Log($"Logged Out! User: {_login}", LogType.AnilibriaClient, LogReasonContext.Info);
         }
 
-        public async Task<Title[]> GetFavoriteTitles() =>
-            await Utilities.GetData<Title[]>(_httpClient, Urls.GetFavoriteTitles(_token).AbsoluteUri);
-
-        public async Task DeleteFavoriteAsync(Title title)
+        public async Task<Title[]> GetFavoriteTitles()
         {
-            var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/api/index.php");
+            Logger.Log($"Getting Favorite Titles.. User: {_login}", LogType.AnilibriaClient, LogReasonContext.Info);
 
-            var values = new Dictionary<string, string>()
-            {
-                {"query", "favorites" },
-                {"id", title.Id.ToString() },
-                {"action", "delete" },
-            };
+            var titles =await Utilities.GetData<Title[]>(_httpClient, Urls.GetFavoriteTitles(_token).AbsoluteUri);
 
-            var content = new FormUrlEncodedContent(values);
+            string[] names = new string[titles.Length];
 
-            await _httpClient.PostAsync(uri, content);
+            foreach (var title in titles)
+                Logger.Log($"Got Favorite Title from {_login}: {title.Name} | {title.Id}", LogType.AnilibriaClient, LogReasonContext.Info);
+
+
+            return titles;
         }
-
         public async Task AddFavoriteAsync(Title title)
         {
+            Logger.Log($"Starting adding to favorite {title.Code} | {title.Id}!", LogType.AnilibriaClient, LogReasonContext.Info);
+
             var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/api/index.php");
 
             var values = new Dictionary<string, string>()
@@ -120,8 +128,38 @@ namespace Anilibria.NET.Client
             var content = new FormUrlEncodedContent(values);
 
             await _httpClient.PostAsync(uri, content);
+
+            Logger.Log($"Added to favorite {title.Code} | {title.Id}!", LogType.AnilibriaClient, LogReasonContext.Info);
+
         }
 
-        public void Dispose() => _httpClient.Dispose();
+        public async Task DeleteFavoriteAsync(Title title)
+        {
+            Logger.Log($"Starting deleting from to favorite {title.Code} | {title.Id}!", LogType.AnilibriaClient, LogReasonContext.Info);
+
+            var uri = new Uri($"{Urls.SITE_ROOT_URL}/public/api/index.php");
+
+            var values = new Dictionary<string, string>()
+            {
+                {"query", "favorites" },
+                {"id", title.Id.ToString() },
+                {"action", "delete" },
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            await _httpClient.PostAsync(uri, content);
+
+            Logger.Log($"Deleted from favorite {title.Code} | {title.Id}!", LogType.AnilibriaClient, LogReasonContext.Info);
+        }
+
+        public void Dispose()
+        {
+            Logger.Log("Http Client is Disposing!", LogType.AnilibriaClient, LogReasonContext.Warning);
+
+            _httpClient.Dispose();
+
+            Logger.Log("Http Client was Disposed!", LogType.AnilibriaClient, LogReasonContext.Warning);
+        }
     }
 }
