@@ -23,14 +23,6 @@ namespace Anilibria.NET.ConsolePlayground
 
             subscriber.SubscribeOnNew();
 
-            var client = new AnilibriaClient("Kotoxik", "kokoilko1234");
-
-            await client.LoginAsync();
-
-            var titles = await client.GetFavoriteTitles();
-
-            Logger.Log("Got favorite titels from");
-
             Thread.Sleep(-1);
         }
 
