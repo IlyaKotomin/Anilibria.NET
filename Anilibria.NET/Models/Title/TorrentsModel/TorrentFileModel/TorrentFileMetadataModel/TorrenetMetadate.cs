@@ -25,11 +25,11 @@ namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel.Torrent
         /// </summary>
         [JsonProperty("announce")] public string[]? Announce { get; private set; }
 
+
         /// <summary>
         /// An array of <see cref="MetadateFile"/>s containing a list of files in the torrent
         /// </summary>
         [JsonProperty("files_list")] public List<MetadateFile>? MetadateFiles { get; private set; }
-
 
 
         /// <summary>
