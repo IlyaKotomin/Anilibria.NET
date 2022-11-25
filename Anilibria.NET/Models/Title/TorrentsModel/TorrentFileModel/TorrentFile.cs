@@ -66,7 +66,6 @@ namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel
         [JsonConverter(typeof(UnixDateTimeConverter))] public DateTime? UploadedDate { get; private set; }
 
 
-
         /// <summary>
         /// Current torrent file hash
         /// </summary>

@@ -2,6 +2,9 @@
 
 namespace Anilibria.NET.Models.TitleModel.TorrentsModel.TorrentFileModel
 {
+    /// <summary>
+    /// Information about video quality from <see cref="TorrentFile"/>
+    /// </summary>
     public class TorrentQuality
     {
         /// <summary>

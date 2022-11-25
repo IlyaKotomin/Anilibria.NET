@@ -9,6 +9,12 @@ using Newtonsoft.Json.Converters;
 
 namespace Anilibria.NET.Models.TitleModel
 {
+    /// <summary>
+    /// Translated title from anilibtia.tv!
+    /// You can get all information about the title,
+    /// like: names, posters, episodes, torrent files ect.
+    /// Reed docs to see more
+    /// </summary>
     public class Title
     {
         #region Common-Info

@@ -4,6 +4,11 @@ using Newtonsoft.Json;
 
 namespace Anilibria.NET.Models.TitleModel.TorrentsModel
 {
+    /// <summary>
+    /// Torrent configuration.
+    /// Conteins <see cref="Series"/> and
+    /// <see cref="TorrentFile"/>s
+    /// </summary>
     public class Torrent
     {
         /// <summary>
