@@ -15,13 +15,7 @@ namespace Anilibria.NET.ConsolePlayground
 
         public async Task MainAsync()
         {
-            Logger.OnLog += OnLogRecieved;
-
-            var subscriber = new Subscriber();
-
-            subscriber.OnTitleRecieved += OnNewTitleRecieved;
-
-            subscriber.SubscribeOnNew();
+            Title title = await AnilibriaAPI.GetRandomTitleAsync();
 
             Thread.Sleep(-1);
         }

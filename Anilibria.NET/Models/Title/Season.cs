@@ -1,5 +1,8 @@
 ﻿namespace Anilibria.NET.Models.TitleModel
 {
+    /// <summary>
+    /// Season of title
+    /// </summary>
     public enum Season
     {
         Winter = 1,

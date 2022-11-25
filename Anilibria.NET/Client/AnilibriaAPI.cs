@@ -17,7 +17,7 @@ namespace Anilibria.NET.Client
         internal static HttpClient HttpClient = new HttpClient();
 
         /// <summary>
-        /// Returns title by id from anilibriya.tv
+        /// Returns title by id
         /// </summary>
         /// <param name="id">Title ID</param>
         /// <returns>anime title</returns>
@@ -57,7 +57,7 @@ namespace Anilibria.NET.Client
         public static Task<int[]> GetAnimeYearsAsync() =>
             Utilities.GetData<int[]>(HttpClient, Urls.GetAnimeYearsUri().AbsoluteUri);
 
-        public static Task<string[]> GetAnimeGenresAsync(GenresSortingType sortingType) =>
+        public static Task<string[]> GetGenresAsync(GenresSortingType sortingType) =>
             Utilities.GetData<string[]>(HttpClient, Urls.GetAnimeGenresUri(sortingType).AbsoluteUri);
 
         public static Task<Title[]> SearchTitlesAsync(SearchQueryBuilder queryBuilder) =>
