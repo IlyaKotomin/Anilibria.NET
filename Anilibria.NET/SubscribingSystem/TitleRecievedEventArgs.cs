@@ -1,10 +1,5 @@
 ﻿using Anilibria.NET.Helpers.LogSystem;
 using Anilibria.NET.Models.TitleModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Anilibria.NET.SubscribingSystem
 {
@@ -17,7 +12,6 @@ namespace Anilibria.NET.SubscribingSystem
         /// Title in args
         /// </summary>
         public Title? Title { get; private set; }
-
 
 
         /// <summary>

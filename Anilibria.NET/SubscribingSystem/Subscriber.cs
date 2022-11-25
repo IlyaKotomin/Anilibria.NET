@@ -7,7 +7,7 @@ using WebSocket4Net;
 namespace Anilibria.NET.SubscribingSystem
 {
     /// <summary>
-    /// This class is needed in order to subscribe to titles
+    /// This class is needed in order to subscribe to titles via websocket
     /// </summary>
     public class Subscriber
     {
